@@ -4,7 +4,7 @@
    ============================================================ */
 
 // Número de WhatsApp no formato internacional, só números (com DDI 55 + DDD).
-const WHATSAPP_NUMBER = "5511999999999";
+const WHATSAPP_NUMBER = "5562996852824";
 
 /* ============================================================
    LÓGICA DO SITE — normalmente não precisa mexer daqui pra baixo.
