@@ -8,14 +8,21 @@ lista de códigos direto pelo WhatsApp.
 ## Estrutura
 
 ```
-index.html        → estrutura das seções do site
-css/styles.css     → todo o visual (cores, fontes, layout, responsivo)
-js/main.js          → conteúdo dinâmico (catálogo, filtros, seleção, WhatsApp)
+index.html            → estrutura das seções do site
+css/styles.css         → todo o visual (cores, fontes, layout, responsivo)
+js/photos-data.js       → CONTEÚDO: categorias, profissões e a lista de fotos
+js/app.js                → LÓGICA: filtros, seleção, WhatsApp, lightbox etc.
+images/catalogo/          → onde ficam os arquivos de foto reais
 ```
+
+O catálogo foi dividido em dois arquivos JS de propósito: `photos-data.js`
+é só conteúdo (o que você/eu editamos quando o catálogo muda) e `app.js` é o
+motor do site (raramente precisa ser tocado). `index.html` carrega
+`photos-data.js` antes de `app.js` — essa ordem importa, não inverta.
 
 ## Como editar o conteúdo (sem precisar programar)
 
-Abra o arquivo `js/main.js`. No topo do arquivo há um bloco de **CONFIGURAÇÕES**:
+Abra o arquivo `js/photos-data.js`.
 
 ### Adicionar uma fotografia nova
 
@@ -23,16 +30,18 @@ Copie um bloco inteiro dentro de `catalogPhotos` e cole no fim da lista,
 editando os valores:
 
 ```js
-{ code: "VS-016", category: "estudio", title: "", tags: [], image: "images/vs-016.jpg" },
+{ code: "VS-031", category: "estudio", professions: ["psicologas"], title: "", tags: [], image: "images/catalogo/VS-031.jpg" },
 ```
 
 - `code`: o código dessa foto. **Use sempre o próximo número disponível** (se a
-  última foto é VS-015, a nova é VS-016). Nunca reaproveite nem mude o código
+  última foto é VS-030, a nova é VS-031). Nunca reaproveite nem mude o código
   de uma foto que já existe — clientes podem citar esse código depois.
 - `category`: precisa ser um dos `id` cadastrados em `CATEGORIES` (ver abaixo).
+- `professions`: lista de `id` de `PROFESSIONS` a que essa foto serve de
+  referência — pode ter mais de uma, ou ficar vazia `[]`.
 - `title`: legenda curta e opcional — pode deixar `""` se não quiser legenda.
 - `tags`: palavras-chave internas (não aparecem pra cliente); pode deixar `[]`.
-- `image`: link (`https://...`) ou caminho de um arquivo dentro da pasta `images/`.
+- `image`: link (`https://...`) ou caminho de um arquivo dentro de `images/catalogo/`.
 
 Para remover uma foto, apague o bloco correspondente. Reordenar os blocos na
 lista muda só a ordem de exibição — o código de cada foto continua o mesmo.
@@ -54,9 +63,20 @@ Depois, use esse `id` no campo `category` das fotos que pertencem a ela.
 Para remover uma categoria, apague a linha e mude a categoria das fotos que a
 usavam.
 
+### Criar uma profissão nova
+
+Mesma lógica, dentro de `PROFESSIONS`:
+
+```js
+{ id: "coaches", label: "Coaches" },
+```
+
+Depois, inclua esse `id` na lista `professions` de cada foto que sirva de
+referência para essa profissão.
+
 ### Trocar o número de WhatsApp
 
-Também no topo do `js/main.js`:
+Esse não fica em `photos-data.js` — é no topo do `js/app.js`:
 
 ```js
 const WHATSAPP_NUMBER = "5511999999999";
@@ -66,10 +86,11 @@ Troque pelo número real, com DDI 55 + DDD, só números (ex: `5511987654321`).
 
 ## Como usar suas próprias fotos
 
-1. Coloque os arquivos de imagem dentro da pasta `images/` (pode criar
-   subpastas se quiser organizar, ex: `images/catalogo/vs-016.jpg`).
-2. No `js/main.js`, troque o valor de `image` da fotografia pelo caminho do
-   arquivo, por exemplo: `"images/catalogo/vs-016.jpg"`.
+1. Salve o arquivo da foto dentro de `images/catalogo/`, nomeado com o
+   próprio código, por exemplo: `images/catalogo/VS-031.jpg`. Isso evita erro
+   de digitação — o nome do arquivo já corresponde ao código no catálogo.
+2. Em `js/photos-data.js`, defina `image: "images/catalogo/VS-031.jpg"` na
+   foto correspondente.
 
 Enquanto as fotos reais não estiverem prontas, o site usa imagens de exemplo
 (via picsum.photos) só para você visualizar o layout funcionando. Se um link
