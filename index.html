@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paty Rocha | Ensaios Fotográficos com IA</title>
-  <meta name="description" content="Ensaios fotográficos criados com Inteligência Artificial. Escolha seu estilo no catálogo e transforme sua imagem em arte." />
+  <title>Vitrine Sagrada | Catálogo de Referências</title>
+  <meta name="description" content="Catálogo visual de referências para ensaios fotográficos com IA da Vitrine Sagrada. Escolha suas fotos favoritas e envie pelo WhatsApp." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,19 +17,7 @@
 
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a href="#top" class="logo">Paty Rocha</a>
-
-      <nav class="nav" id="nav">
-        <a href="#sobre">Sobre</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#contato" class="nav-cta">Fale comigo</a>
-      </nav>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="#top" class="logo">Vitrine Sagrada</a>
     </div>
   </header>
 
@@ -37,100 +25,55 @@
     <section class="hero" id="top">
       <div class="hero-bg"></div>
       <div class="container hero-content">
-        <p class="eyebrow">Fotografia reinventada por Inteligência Artificial</p>
-        <h1>Seu ensaio dos sonhos,<br>sem sair de casa.</h1>
+        <p class="eyebrow">Catálogo de Referências</p>
+        <h1>Escolha as fotografias que<br>mais combinam com você</h1>
         <p class="hero-subtitle">
-          Escolha um estilo no catálogo e eu transformo suas fotos em um ensaio fotográfico
-          profissional criado com IA — editorial, fantasia, praia, corporativo e muito mais.
+          Navegue pelo catálogo, toque no coração para favoritar as fotos que você
+          gostaria de usar como referência no seu ensaio, e envie sua lista direto pelo WhatsApp.
         </p>
         <div class="hero-actions">
-          <a href="#catalogo" class="btn btn-primary">Ver catálogo de estilos</a>
-          <a href="#portfolio" class="btn btn-ghost">Ver portfólio</a>
+          <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
         </div>
       </div>
-      <a href="#sobre" class="scroll-hint" aria-label="Rolar para baixo">↓</a>
+      <a href="#como-funciona" class="scroll-hint" aria-label="Rolar para baixo">↓</a>
     </section>
 
-    <section class="sobre" id="sobre">
-      <div class="container sobre-inner reveal">
-        <div class="sobre-img">
-          <img src="https://picsum.photos/seed/paty-rocha-sobre/700/860" alt="Paty Rocha" loading="lazy"
-               onerror="window.handleImgError && handleImgError(this, 'Paty Rocha')" />
-        </div>
-        <div class="sobre-text">
-          <p class="eyebrow">Sobre</p>
-          <h2>Fotografia com IA, feita com sensibilidade</h2>
-          <p>
-            Eu uso Inteligência Artificial como ferramenta criativa para produzir ensaios
-            fotográficos únicos, sem estúdio, sem deslocamento e sem complicação. Você envia
-            algumas fotos de referência, escolhe o estilo no catálogo, e eu cuido de toda a
-            direção de arte, iluminação e composição digitalmente.
-          </p>
-          <p>
-            O resultado: imagens editoriais, delicadas e autênticas — no seu tempo, no seu ritmo.
-          </p>
-          <ul class="sobre-badges">
-            <li>✦ Entrega rápida</li>
-            <li>✦ Estilos exclusivos</li>
-            <li>✦ Alta resolução</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio" id="portfolio">
-      <div class="container">
-        <p class="eyebrow center">Portfólio</p>
-        <h2 class="section-title center reveal">Alguns ensaios já criados</h2>
-        <p class="section-subtitle center reveal">
-          Uma amostra de resultados possíveis. As imagens abaixo são exemplos —
-          substitua pelas suas fotos reais quando estiverem prontas.
-        </p>
-
-        <div class="gallery" id="gallery"></div>
+    <section class="como-funciona" id="como-funciona">
+      <div class="container como-funciona-inner reveal">
+        <ol class="steps">
+          <li>
+            <span class="step-number">1</span>
+            <p>Navegue pelas fotografias do catálogo</p>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <p>Toque no coração para selecionar suas favoritas</p>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <p>Envie sua lista pelo WhatsApp quando terminar</p>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section class="catalogo" id="catalogo">
       <div class="container">
         <p class="eyebrow center">Catálogo</p>
-        <h2 class="section-title center reveal">Escolha o seu estilo</h2>
+        <h2 class="section-title center reveal">Fotografias de referência</h2>
         <p class="section-subtitle center reveal">
-          Clique em "Quero esse estilo" e fale comigo direto pelo WhatsApp — já vou saber
-          exatamente qual ensaio você tem interesse.
+          Toque no coração para selecionar. Toque na foto para ver em tamanho maior.
         </p>
 
+        <div class="filters" id="filters"></div>
         <div class="catalog-grid" id="catalogGrid"></div>
-      </div>
-    </section>
-
-    <section class="depoimentos" id="depoimentos">
-      <div class="container">
-        <p class="eyebrow center">Depoimentos</p>
-        <h2 class="section-title center reveal">Quem já viveu essa experiência</h2>
-
-        <div class="testimonials" id="testimonials"></div>
-      </div>
-    </section>
-
-    <section class="contato" id="contato">
-      <div class="container contato-inner reveal">
-        <h2>Vamos criar seu ensaio?</h2>
-        <p>Me chama no WhatsApp e conta qual estilo combina com você.</p>
-        <a href="#" id="ctaWhatsapp" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-          Falar no WhatsApp
-        </a>
-        <div class="contato-links">
-          <a href="#" id="ctaInstagram" target="_blank" rel="noopener">Instagram</a>
-          <a href="#" id="ctaEmail">E-mail</a>
-        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span>© <span id="year"></span> Paty Rocha — Ensaios Fotográficos com IA</span>
+      <span>© <span id="year"></span> Vitrine Sagrada — Catálogo de Referências</span>
       <span>Feito com ✦</span>
     </div>
   </footer>
@@ -138,6 +81,30 @@
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">✕</button>
     <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <div class="selection-bar" id="selectionBar">
+    <button class="selection-bar-trigger" id="selectionBarTrigger">
+      <span class="selection-bar-count" id="selectionCount">0</span>
+      <span>fotos selecionadas — ver escolhas</span>
+    </button>
+  </div>
+
+  <div class="selection-panel" id="selectionPanel" aria-hidden="true">
+    <div class="selection-panel-backdrop" id="selectionPanelBackdrop"></div>
+    <div class="selection-panel-sheet">
+      <div class="selection-panel-header">
+        <h3>Minhas escolhas</h3>
+        <button class="selection-panel-close" id="selectionPanelClose" aria-label="Fechar">✕</button>
+      </div>
+      <div class="selection-panel-list" id="selectionPanelList"></div>
+      <div class="selection-panel-actions">
+        <button class="btn btn-ghost" id="clearSelectionBtn">Limpar minhas escolhas</button>
+        <a class="btn btn-primary" id="sendSelectionBtn" target="_blank" rel="noopener">
+          Enviar minhas escolhas no WhatsApp
+        </a>
+      </div>
+    </div>
   </div>
 
   <script src="js/main.js"></script>

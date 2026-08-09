@@ -5,93 +5,56 @@
 // Número de WhatsApp no formato internacional, só números (com DDI 55 + DDD).
 const WHATSAPP_NUMBER = "5511999999999";
 
-// Instagram e e-mail exibidos no rodapé/contato.
-const INSTAGRAM_URL = "https://instagram.com/seuusuario";
-const CONTACT_EMAIL = "contato@seudominio.com";
-
-// Categorias do catálogo. Para adicionar/remover um estilo, edite esta lista.
-// "image" pode ser um link (https://...) ou um arquivo local (ex: "images/editorial.jpg").
-const catalogCategories = [
-  {
-    name: "Editorial Fashion",
-    description: "Poses e iluminação de capa de revista, com cenários sofisticados criados por IA.",
-    image: "https://picsum.photos/seed/editorial-fashion/700/900",
-  },
-  {
-    name: "Praia & Verão",
-    description: "Luz dourada, água cristalina e clima leve para um ensaio de dar vontade de viajar.",
-    image: "https://picsum.photos/seed/praia-verao/700/900",
-  },
-  {
-    name: "Fantasia & Conto de Fadas",
-    description: "Cenários mágicos, vestidos etéreos e uma pitada de sonho em cada foto.",
-    image: "https://picsum.photos/seed/fantasia-contodefadas/700/900",
-  },
-  {
-    name: "Executiva & Corporativo",
-    description: "Fotos profissionais para LinkedIn e redes sociais, com ambientação de escritório premium.",
-    image: "https://picsum.photos/seed/executiva-corporativo/700/900",
-  },
-  {
-    name: "Boho & Natureza",
-    description: "Composições orgânicas em meio a jardins e paisagens naturais, estilo livre e autêntico.",
-    image: "https://picsum.photos/seed/boho-natureza/700/900",
-  },
-  {
-    name: "Vintage Anos 90",
-    description: "Estética retrô, cores saturadas e clima nostálgico direto dos anos 90.",
-    image: "https://picsum.photos/seed/vintage-anos90/700/900",
-  },
-  {
-    name: "Glamour Noturno",
-    description: "Luzes da cidade, elegância e drama para um ensaio noturno cheio de personalidade.",
-    image: "https://picsum.photos/seed/glamour-noturno/700/900",
-  },
-  {
-    name: "Maternidade Dourada",
-    description: "Um registro delicado e luminoso para celebrar essa fase única.",
-    image: "https://picsum.photos/seed/maternidade-dourada/700/900",
-  },
+// Categorias do catálogo, usadas nos filtros. "id" nunca deve mudar depois de
+// usado em alguma fotografia (é o que liga a foto à categoria). "label" é o
+// texto exibido e pode ser alterado livremente a qualquer momento.
+// Para criar uma categoria nova: adicione um objeto igual aos abaixo.
+// Para remover: apague o objeto (e mude a categoria das fotos que a usavam).
+const CATEGORIES = [
+  { id: "profissional", label: "Profissional / Branding" },
+  { id: "consultorio", label: "Consultório" },
+  { id: "estudio", label: "Estúdio" },
+  { id: "lifestyle", label: "Lifestyle" },
+  { id: "externo", label: "Externo" },
 ];
 
-// Fotos do portfólio (galeria). Adicione ou remova itens livremente.
-const portfolioImages = [
-  "https://picsum.photos/seed/portfolio-1/600/800",
-  "https://picsum.photos/seed/portfolio-2/600/750",
-  "https://picsum.photos/seed/portfolio-3/600/900",
-  "https://picsum.photos/seed/portfolio-4/600/700",
-  "https://picsum.photos/seed/portfolio-5/600/820",
-  "https://picsum.photos/seed/portfolio-6/600/760",
-  "https://picsum.photos/seed/portfolio-7/600/880",
-  "https://picsum.photos/seed/portfolio-8/600/720",
-  "https://picsum.photos/seed/portfolio-9/600/840",
-];
-
-// Depoimentos de clientes.
-const testimonials = [
-  {
-    quote: "Simplesmente incrível! Não sair de casa e ainda ter fotos profissionais lindas assim.",
-    name: "Camila S.",
-    style: "Editorial Fashion",
-    avatar: "https://picsum.photos/seed/avatar-1/100/100",
-  },
-  {
-    quote: "Achei que fosse complicado, mas foi super rápido e o resultado ficou melhor do que eu esperava.",
-    name: "Juliana M.",
-    style: "Praia & Verão",
-    avatar: "https://picsum.photos/seed/avatar-2/100/100",
-  },
-  {
-    quote: "Usei as fotos no LinkedIn e recebi vários elogios. Recomendo demais!",
-    name: "Renata A.",
-    style: "Executiva & Corporativo",
-    avatar: "https://picsum.photos/seed/avatar-3/100/100",
-  },
+// Fotografias do catálogo.
+//
+// - code: identificador FIXO da foto (ex: "VS-014"). Nunca reaproveite nem
+//   altere o código de uma foto já publicada, mesmo que ela seja movida ou
+//   reordenada — clientes podem citar esse código numa conversa futura.
+//   Ao adicionar uma foto nova, use o próximo número disponível.
+// - category: precisa ser um "id" que exista em CATEGORIES acima.
+// - title: legenda curta opcional (pode deixar "").
+// - tags: palavras-chave internas, não aparecem para a cliente (uso futuro).
+// - image: link (https://...) ou caminho de arquivo local (ex: "images/vs-014.jpg").
+const catalogPhotos = [
+  { code: "VS-001", category: "profissional", title: "Retrato executivo", tags: ["blazer", "frontal"], image: "https://picsum.photos/seed/vs-001/700/900" },
+  { code: "VS-002", category: "profissional", title: "Perfil para LinkedIn", tags: ["linkedin", "sorriso"], image: "https://picsum.photos/seed/vs-002/700/900" },
+  { code: "VS-003", category: "profissional", title: "", tags: ["braços cruzados"], image: "https://picsum.photos/seed/vs-003/700/900" },
+  { code: "VS-004", category: "consultorio", title: "Atendimento", tags: ["sentada", "notebook", "poltrona"], image: "https://picsum.photos/seed/vs-004/700/900" },
+  { code: "VS-005", category: "consultorio", title: "Anotações", tags: ["prancheta"], image: "https://picsum.photos/seed/vs-005/700/900" },
+  { code: "VS-006", category: "consultorio", title: "", tags: ["recepção"], image: "https://picsum.photos/seed/vs-006/700/900" },
+  { code: "VS-007", category: "estudio", title: "Fundo neutro", tags: ["editorial"], image: "https://picsum.photos/seed/vs-007/700/900" },
+  { code: "VS-008", category: "estudio", title: "", tags: ["luz dramática"], image: "https://picsum.photos/seed/vs-008/700/900" },
+  { code: "VS-009", category: "estudio", title: "Preto e branco", tags: ["pb", "clássico"], image: "https://picsum.photos/seed/vs-009/700/900" },
+  { code: "VS-010", category: "lifestyle", title: "No café", tags: ["casual"], image: "https://picsum.photos/seed/vs-010/700/900" },
+  { code: "VS-011", category: "lifestyle", title: "", tags: ["andando"], image: "https://picsum.photos/seed/vs-011/700/900" },
+  { code: "VS-012", category: "lifestyle", title: "Sorrindo naturalmente", tags: ["candid"], image: "https://picsum.photos/seed/vs-012/700/900" },
+  { code: "VS-013", category: "externo", title: "Luz natural", tags: ["jardim"], image: "https://picsum.photos/seed/vs-013/700/900" },
+  { code: "VS-014", category: "externo", title: "", tags: ["urbano"], image: "https://picsum.photos/seed/vs-014/700/900" },
+  { code: "VS-015", category: "externo", title: "Golden hour", tags: ["pôr do sol"], image: "https://picsum.photos/seed/vs-015/700/900" },
 ];
 
 /* ============================================================
    LÓGICA DO SITE — normalmente não precisa mexer daqui pra baixo
    ============================================================ */
+
+const SELECTION_STORAGE_KEY = "vitrinesagrada:selecoes";
+const ALL_FILTER_ID = "todos";
+
+let activeCategory = ALL_FILTER_ID;
+let selectedCodes = loadSelection();
 
 function buildWhatsAppLink(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -120,103 +83,207 @@ window.handleImgError = function (img, label) {
   img.src = placeholderImage(label);
 };
 
+/* ---------- Seleção (localStorage) ---------- */
+
+function loadSelection() {
+  try {
+    const raw = localStorage.getItem(SELECTION_STORAGE_KEY);
+    const codes = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(codes) ? codes : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function saveSelection() {
+  localStorage.setItem(SELECTION_STORAGE_KEY, JSON.stringify(Array.from(selectedCodes)));
+}
+
+function getSelectedPhotosOrdered() {
+  return catalogPhotos.filter((photo) => selectedCodes.has(photo.code));
+}
+
+function formatCodesList(codes) {
+  if (codes.length === 1) return codes[0];
+  return `${codes.slice(0, -1).join(", ")} e ${codes[codes.length - 1]}`;
+}
+
+function buildSelectionMessage() {
+  const codes = getSelectedPhotosOrdered().map((photo) => photo.code);
+  return `Oi! Escolhi estas referências no catálogo da Vitrine Sagrada:\n${formatCodesList(codes)}.`;
+}
+
+function toggleSelection(code) {
+  if (selectedCodes.has(code)) {
+    selectedCodes.delete(code);
+  } else {
+    selectedCodes.add(code);
+  }
+  saveSelection();
+  syncTileVisual(code);
+  updateSelectionUI();
+}
+
+function clearSelection() {
+  if (selectedCodes.size === 0) return;
+  if (!confirm("Limpar todas as fotos selecionadas?")) return;
+  selectedCodes.clear();
+  saveSelection();
+  document.querySelectorAll(".catalog-tile").forEach((tile) => syncTileVisual(tile.dataset.code));
+  updateSelectionUI();
+}
+
+/* ---------- Filtros ---------- */
+
+function renderFilters() {
+  const wrap = document.getElementById("filters");
+  const chips = [{ id: ALL_FILTER_ID, label: "Todos" }, ...CATEGORIES];
+
+  wrap.innerHTML = chips
+    .map(
+      (chip) => `
+        <button class="filter-chip ${chip.id === activeCategory ? "is-active" : ""}" data-category="${chip.id}">
+          ${chip.label}
+        </button>
+      `
+    )
+    .join("");
+
+  wrap.querySelectorAll(".filter-chip").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.category;
+      renderFilters();
+      renderCatalog();
+    });
+  });
+}
+
+/* ---------- Catálogo ---------- */
+
 function renderCatalog() {
   const grid = document.getElementById("catalogGrid");
-  grid.innerHTML = catalogCategories
-    .map((item) => {
-      const message = `Olá! Vi o catálogo do site e me interessei pelo estilo "${item.name}". Gostaria de saber mais sobre esse ensaio fotográfico com IA! 📸`;
+  const photos =
+    activeCategory === ALL_FILTER_ID
+      ? catalogPhotos
+      : catalogPhotos.filter((photo) => photo.category === activeCategory);
+
+  grid.innerHTML = photos
+    .map((photo) => {
+      const selected = selectedCodes.has(photo.code);
       return `
-        <article class="catalog-card">
-          <div class="catalog-card-img">
-            <img src="${item.image}" alt="Exemplo do estilo ${item.name}" loading="lazy"
-                 onerror="handleImgError(this, '${item.name}')" />
+        <article class="catalog-tile ${selected ? "is-selected" : ""}" data-code="${photo.code}">
+          <div class="tile-image" data-action="view" data-code="${photo.code}">
+            <img src="${photo.image}" alt="Referência ${photo.code}" loading="lazy"
+                 onerror="handleImgError(this, '${photo.code}')" />
+            <span class="tile-code">${photo.code}</span>
+            <button class="tile-select ${selected ? "is-selected" : ""}" data-action="toggle" data-code="${photo.code}"
+                    aria-pressed="${selected}"
+                    aria-label="${selected ? `Remover seleção da foto ${photo.code}` : `Selecionar a foto ${photo.code}`}">
+              ${selected ? "♥" : "♡"}
+            </button>
           </div>
-          <div class="catalog-card-body">
-            <h3>${item.name}</h3>
-            <p>${item.description}</p>
-            <a class="btn btn-primary" href="${buildWhatsAppLink(message)}" target="_blank" rel="noopener">
-              Quero esse estilo
-            </a>
-          </div>
+          ${photo.title ? `<p class="tile-title">${photo.title}</p>` : ""}
         </article>
       `;
     })
     .join("");
+
+  observeReveal(grid.querySelectorAll(".catalog-tile"));
 }
 
-function renderGallery() {
-  const gallery = document.getElementById("gallery");
-  gallery.innerHTML = portfolioImages
-    .map(
-      (src, i) => `
-        <figure class="gallery-item" data-src="${src}">
-          <img src="${src}" alt="Ensaio fotográfico com IA ${i + 1}" loading="lazy"
-               onerror="handleImgError(this, 'Portfólio')" />
-        </figure>
-      `
-    )
-    .join("");
+function syncTileVisual(code) {
+  const tile = document.querySelector(`.catalog-tile[data-code="${code}"]`);
+  if (!tile) return;
+  const selected = selectedCodes.has(code);
+  tile.classList.toggle("is-selected", selected);
 
-  gallery.querySelectorAll(".gallery-item").forEach((item) => {
-    item.addEventListener("click", () => openLightbox(item.dataset.src));
+  const btn = tile.querySelector(".tile-select");
+  btn.classList.toggle("is-selected", selected);
+  btn.textContent = selected ? "♥" : "♡";
+  btn.setAttribute("aria-pressed", String(selected));
+  btn.setAttribute("aria-label", selected ? `Remover seleção da foto ${code}` : `Selecionar a foto ${code}`);
+}
+
+function setupCatalogInteractions() {
+  const grid = document.getElementById("catalogGrid");
+  grid.addEventListener("click", (e) => {
+    const toggleBtn = e.target.closest('[data-action="toggle"]');
+    if (toggleBtn) {
+      toggleSelection(toggleBtn.dataset.code);
+      return;
+    }
+    const viewArea = e.target.closest('[data-action="view"]');
+    if (viewArea) {
+      const photo = catalogPhotos.find((p) => p.code === viewArea.dataset.code);
+      if (photo) openLightbox(photo.image);
+    }
   });
 }
 
-function renderTestimonials() {
-  const wrap = document.getElementById("testimonials");
-  wrap.innerHTML = testimonials
-    .map(
-      (t) => `
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">"${t.quote}"</p>
-          <div class="author">
-            <img src="${t.avatar}" alt="${t.name}" loading="lazy"
-                 onerror="handleImgError(this, '${t.name}')" />
-            <div>
-              <strong>${t.name}</strong>
-              <span>${t.style}</span>
+/* ---------- Barra e painel de seleção ---------- */
+
+function updateSelectionUI() {
+  const count = selectedCodes.size;
+
+  document.getElementById("selectionCount").textContent = String(count);
+  document.getElementById("selectionBar").classList.toggle("is-visible", count > 0);
+
+  const list = document.getElementById("selectionPanelList");
+  const photos = getSelectedPhotosOrdered();
+
+  list.innerHTML = photos.length
+    ? photos
+        .map(
+          (photo) => `
+            <div class="selection-panel-item">
+              <img src="${photo.image}" alt="${photo.code}" onerror="handleImgError(this, '${photo.code}')" />
+              <span>${photo.code}</span>
+              <button data-action="remove" data-code="${photo.code}" aria-label="Remover ${photo.code} da seleção">✕</button>
             </div>
-          </div>
-        </div>
-      `
-    )
-    .join("");
+          `
+        )
+        .join("")
+    : `<p class="selection-panel-empty">Nenhuma foto selecionada ainda.</p>`;
+
+  const sendBtn = document.getElementById("sendSelectionBtn");
+  if (count > 0) {
+    sendBtn.href = buildWhatsAppLink(buildSelectionMessage());
+    sendBtn.removeAttribute("aria-disabled");
+  } else {
+    sendBtn.href = "#";
+    sendBtn.setAttribute("aria-disabled", "true");
+  }
 }
 
-function setupContactLinks() {
-  const generalMessage = "Olá! Vi o site e gostaria de saber mais sobre os ensaios fotográficos com IA.";
-  document.getElementById("ctaWhatsapp").href = buildWhatsAppLink(generalMessage);
-  document.getElementById("ctaInstagram").href = INSTAGRAM_URL;
-  document.getElementById("ctaInstagram").textContent = "Instagram";
-  const emailLink = document.getElementById("ctaEmail");
-  emailLink.href = `mailto:${CONTACT_EMAIL}`;
-  emailLink.textContent = CONTACT_EMAIL;
+function openSelectionPanel() {
+  const panel = document.getElementById("selectionPanel");
+  panel.classList.add("is-open");
+  panel.setAttribute("aria-hidden", "false");
 }
 
-function setupHeader() {
-  const header = document.getElementById("header");
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
-  onScroll();
-  window.addEventListener("scroll", onScroll);
+function closeSelectionPanel() {
+  const panel = document.getElementById("selectionPanel");
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden", "true");
 }
 
-function setupMobileMenu() {
-  const toggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("nav");
+function setupSelectionUI() {
+  document.getElementById("selectionBarTrigger").addEventListener("click", openSelectionPanel);
+  document.getElementById("selectionPanelClose").addEventListener("click", closeSelectionPanel);
+  document.getElementById("selectionPanelBackdrop").addEventListener("click", closeSelectionPanel);
+  document.getElementById("clearSelectionBtn").addEventListener("click", clearSelection);
 
-  toggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
+  document.getElementById("selectionPanelList").addEventListener("click", (e) => {
+    const removeBtn = e.target.closest('[data-action="remove"]');
+    if (removeBtn) toggleSelection(removeBtn.dataset.code);
   });
 
-  nav.querySelectorAll("a").forEach((link) =>
-    link.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    })
-  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSelectionPanel();
+  });
 }
+
+/* ---------- Lightbox ---------- */
 
 function setupLightbox() {
   const lightbox = document.getElementById("lightbox");
@@ -241,8 +308,17 @@ function closeLightbox() {
   document.getElementById("lightbox").classList.remove("is-open");
 }
 
-function setupReveal() {
-  const targets = document.querySelectorAll(".reveal, .catalog-card");
+/* ---------- Header / animações ---------- */
+
+function setupHeader() {
+  const header = document.getElementById("header");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  onScroll();
+  window.addEventListener("scroll", onScroll);
+}
+
+function observeReveal(extraTargets) {
+  const targets = [...document.querySelectorAll(".reveal"), ...(extraTargets || [])];
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -258,13 +334,12 @@ function setupReveal() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  renderFilters();
   renderCatalog();
-  renderGallery();
-  renderTestimonials();
-  setupContactLinks();
-  setupHeader();
-  setupMobileMenu();
+  setupCatalogInteractions();
+  setupSelectionUI();
   setupLightbox();
-  setupReveal();
+  setupHeader();
+  updateSelectionUI();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
