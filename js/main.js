@@ -97,6 +97,29 @@ function buildWhatsAppLink(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+// Se um link de imagem quebrar (ou não carregar), mostra um fundo elegante no lugar
+// em vez do ícone de "imagem quebrada" do navegador.
+function placeholderImage(label) {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="700" height="900">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#241d14" />
+          <stop offset="1" stop-color="#c9a76a" stop-opacity="0.55" />
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)" />
+      <text x="50%" y="50%" font-family="Georgia, serif" font-size="32" fill="#f7f2ea"
+            text-anchor="middle" dominant-baseline="middle" opacity="0.9">${label}</text>
+    </svg>`;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+window.handleImgError = function (img, label) {
+  img.onerror = null;
+  img.src = placeholderImage(label);
+};
+
 function renderCatalog() {
   const grid = document.getElementById("catalogGrid");
   grid.innerHTML = catalogCategories
@@ -105,7 +128,8 @@ function renderCatalog() {
       return `
         <article class="catalog-card">
           <div class="catalog-card-img">
-            <img src="${item.image}" alt="Exemplo do estilo ${item.name}" loading="lazy" />
+            <img src="${item.image}" alt="Exemplo do estilo ${item.name}" loading="lazy"
+                 onerror="handleImgError(this, '${item.name}')" />
           </div>
           <div class="catalog-card-body">
             <h3>${item.name}</h3>
@@ -126,7 +150,8 @@ function renderGallery() {
     .map(
       (src, i) => `
         <figure class="gallery-item" data-src="${src}">
-          <img src="${src}" alt="Ensaio fotográfico com IA ${i + 1}" loading="lazy" />
+          <img src="${src}" alt="Ensaio fotográfico com IA ${i + 1}" loading="lazy"
+               onerror="handleImgError(this, 'Portfólio')" />
         </figure>
       `
     )
@@ -146,7 +171,8 @@ function renderTestimonials() {
           <div class="stars">★★★★★</div>
           <p class="quote">"${t.quote}"</p>
           <div class="author">
-            <img src="${t.avatar}" alt="${t.name}" loading="lazy" />
+            <img src="${t.avatar}" alt="${t.name}" loading="lazy"
+                 onerror="handleImgError(this, '${t.name}')" />
             <div>
               <strong>${t.name}</strong>
               <span>${t.style}</span>
