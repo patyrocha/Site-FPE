@@ -88,8 +88,11 @@ const SELECTION_STORAGE_KEY = "vitrinesagrada:selecoes";
 const ALL_FILTER_ID = "todos";
 
 let activeMode = "estilo"; // "estilo" | "profissao"
-let activeCategory = ALL_FILTER_ID;
-let activeProfession = ALL_FILTER_ID;
+// null = a cliente ainda não escolheu nenhum filtro nessa aba (mostra a
+// mensagem convidando a escolher, em vez do grid completo). Depois que ela
+// escolher algo (mesmo "Todos"/"Todas"), o valor fica lembrado por aba.
+let activeCategory = null;
+let activeProfession = null;
 let selectedCodes = loadSelection();
 
 function buildWhatsAppLink(message) {
@@ -227,12 +230,17 @@ function renderFilters() {
 
 /* ---------- Catálogo ---------- */
 
+// Retorna null quando a cliente ainda não escolheu nenhum filtro na aba atual
+// (nem "Todos"/"Todas"), para diferenciar de um filtro escolhido que
+// simplesmente não tem fotos ainda (array vazio).
 function getVisiblePhotos() {
   if (activeMode === "estilo") {
+    if (activeCategory === null) return null;
     return activeCategory === ALL_FILTER_ID
       ? catalogPhotos
       : catalogPhotos.filter((photo) => photo.category === activeCategory);
   }
+  if (activeProfession === null) return null;
   return activeProfession === ALL_FILTER_ID
     ? catalogPhotos
     : catalogPhotos.filter((photo) => (photo.professions || []).includes(activeProfession));
@@ -241,6 +249,16 @@ function getVisiblePhotos() {
 function renderCatalog() {
   const grid = document.getElementById("catalogGrid");
   const photos = getVisiblePhotos();
+
+  if (photos === null) {
+    grid.innerHTML = `<p class="catalog-empty">Escolha um estilo ou uma profissão acima para ver as fotografias.</p>`;
+    return;
+  }
+
+  if (photos.length === 0) {
+    grid.innerHTML = `<p class="catalog-empty">Nenhuma fotografia nesse filtro ainda.</p>`;
+    return;
+  }
 
   grid.innerHTML = photos
     .map((photo) => {
@@ -262,10 +280,6 @@ function renderCatalog() {
       `;
     })
     .join("");
-
-  if (photos.length === 0) {
-    grid.innerHTML = `<p class="catalog-empty">Nenhuma fotografia nesse filtro ainda.</p>`;
-  }
 
   observeReveal(grid.querySelectorAll(".catalog-tile"));
 }
@@ -418,6 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTabs();
   renderFilters();
   renderCatalog();
+  observeReveal(); // garante que título/subtítulo apareçam mesmo se o grid começar vazio
   setupCatalogInteractions();
   setupSelectionUI();
   setupLightbox();
