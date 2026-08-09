@@ -34,12 +34,12 @@ function placeholderImage(label) {
     <svg xmlns="http://www.w3.org/2000/svg" width="700" height="900">
       <defs>
         <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#241d14" />
-          <stop offset="1" stop-color="#c9a76a" stop-opacity="0.55" />
+          <stop offset="0" stop-color="#f0f0f0" />
+          <stop offset="1" stop-color="#e0e0e0" />
         </linearGradient>
       </defs>
       <rect width="100%" height="100%" fill="url(#g)" />
-      <text x="50%" y="50%" font-family="Georgia, serif" font-size="32" fill="#f7f2ea"
+      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="32" fill="#9a9a9a"
             text-anchor="middle" dominant-baseline="middle" opacity="0.9">${label}</text>
     </svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
@@ -81,13 +81,14 @@ function buildSelectionMessage() {
 }
 
 function toggleSelection(code) {
-  if (selectedCodes.has(code)) {
-    selectedCodes.delete(code);
-  } else {
+  const justSelected = !selectedCodes.has(code);
+  if (justSelected) {
     selectedCodes.add(code);
+  } else {
+    selectedCodes.delete(code);
   }
   saveSelection();
-  syncTileVisual(code);
+  syncTileVisual(code, justSelected);
   updateSelectionUI();
 }
 
@@ -191,18 +192,20 @@ function renderCatalog() {
   grid.innerHTML = photos
     .map((photo) => {
       const selected = selectedCodes.has(photo.code);
+      const captionText = photo.title ? `${photo.code} · ${photo.title}` : photo.code;
       return `
         <article class="catalog-tile ${selected ? "is-selected" : ""}" data-code="${photo.code}">
           <div class="tile-image" data-action="view" data-code="${photo.code}">
             <img src="${photo.image}" alt="Referência ${photo.code}" loading="lazy"
                  onerror="handleImgError(this, '${photo.code}')" />
-            <span class="tile-code">${photo.code}</span>
+          </div>
+          <div class="tile-caption">
+            <span class="tile-caption-text">${captionText}</span>
             <button class="tile-select ${selected ? "is-selected" : ""}" data-action="toggle" data-code="${photo.code}"
                     aria-pressed="${selected}"
                     aria-label="${selected ? `Remover seleção da foto ${photo.code}` : `Selecionar a foto ${photo.code}`}">
               ${selected ? "♥" : "♡"}
             </button>
-            ${photo.title ? `<span class="tile-title-overlay">${photo.title}</span>` : ""}
           </div>
         </article>
       `;
@@ -212,7 +215,7 @@ function renderCatalog() {
   observeReveal(grid.querySelectorAll(".catalog-tile"));
 }
 
-function syncTileVisual(code) {
+function syncTileVisual(code, justSelected) {
   const tile = document.querySelector(`.catalog-tile[data-code="${code}"]`);
   if (!tile) return;
   const selected = selectedCodes.has(code);
@@ -223,6 +226,13 @@ function syncTileVisual(code) {
   btn.textContent = selected ? "♥" : "♡";
   btn.setAttribute("aria-pressed", String(selected));
   btn.setAttribute("aria-label", selected ? `Remover seleção da foto ${code}` : `Selecionar a foto ${code}`);
+
+  if (justSelected) {
+    btn.classList.remove("pulse");
+    void btn.offsetWidth; // reinicia a animação se a cliente clicar rápido várias vezes
+    btn.classList.add("pulse");
+    setTimeout(() => btn.classList.remove("pulse"), 500);
+  }
 }
 
 function setupCatalogInteractions() {
