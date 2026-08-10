@@ -341,6 +341,39 @@ function closeLightbox() {
   document.getElementById("lightbox").classList.remove("is-open");
 }
 
+/* ---------- Navegação horizontal dos filtros (setas) ---------- */
+
+function setupFiltersScroller() {
+  const track = document.getElementById("filters");
+  const leftBtn = document.getElementById("filtersArrowLeft");
+  const rightBtn = document.getElementById("filtersArrowRight");
+  if (!track || !leftBtn || !rightBtn) return;
+
+  function updateArrows() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const scrollable = maxScroll > 4; // sobra de conteúdo além da área visível
+    leftBtn.hidden = !scrollable || track.scrollLeft <= 4;
+    rightBtn.hidden = !scrollable || track.scrollLeft >= maxScroll - 4;
+  }
+
+  leftBtn.addEventListener("click", () => {
+    track.scrollBy({ left: -track.clientWidth * 0.8, behavior: "smooth" });
+  });
+  rightBtn.addEventListener("click", () => {
+    track.scrollBy({ left: track.clientWidth * 0.8, behavior: "smooth" });
+  });
+
+  track.addEventListener("scroll", updateArrows, { passive: true });
+  window.addEventListener("resize", updateArrows);
+
+  // Reavalia sempre que os chips forem trocados (troca de aba/filtro), sem
+  // precisar acoplar essa lógica ao renderFilters() — funciona automaticamente
+  // com qualquer quantidade de categorias/profissões, hoje ou no futuro.
+  new MutationObserver(updateArrows).observe(track, { childList: true });
+
+  updateArrows();
+}
+
 /* ---------- Header / animações ---------- */
 
 function setupHeader() {
@@ -371,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFilters();
   renderCatalog();
   observeReveal(); // garante que título/subtítulo apareçam mesmo se o grid começar vazio
+  setupFiltersScroller();
   setupCatalogInteractions();
   setupSelectionUI();
   setupLightbox();

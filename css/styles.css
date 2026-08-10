@@ -373,16 +373,52 @@ button {
 }
 
 /* Filtros */
+.filters-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0 22px;
+}
+
 .filters {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 4px 2px 22px;
+  padding: 0 2px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-width: 0;
+  scroll-behavior: smooth;
 }
 
 .filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filters-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-light);
+  background: #fff;
+  color: var(--color-ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), opacity var(--transition);
+}
+
+.filters-arrow:hover {
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+}
+
+.filters-arrow[hidden] {
   display: none;
 }
 
