@@ -20,7 +20,6 @@ const CATEGORIES = [
   { id: "lifestyle-natural", label: "Lifestyle e Natural" },
   { id: "ar-livre", label: "Ar Livre" },
   { id: "close-editorial", label: "Close e Editorial" },
-  { id: "atendimento", label: "Atendimento" },
 ];
 
 // Profissões (navegação "Por profissão"). Mesma regra do "id" das categorias:
@@ -42,7 +41,7 @@ const PROFESSIONS = [
 //   altere o código de uma foto já publicada, mesmo que ela seja movida ou
 //   reordenada — clientes podem citar esse código numa conversa futura.
 //   Ao adicionar uma foto nova, use o próximo número disponível (a próxima
-//   livre depois deste lote é VS-066).
+//   livre depois deste lote é VS-073).
 // - category: precisa ser um "id" que exista em CATEGORIES acima.
 // - professions: lista de "id" de PROFESSIONS a que essa foto serve de
 //   referência. Uma mesma foto pode pertencer a várias profissões (ou nenhuma
@@ -93,10 +92,10 @@ const catalogPhotos = [
   { code: "VS-039", category: "ar-livre", professions: [], title: "", tags: [], image: "images/catalogo/VS-039.png" },
   { code: "VS-040", category: "ar-livre", professions: [], title: "", tags: [], image: "images/catalogo/VS-040.png" },
   { code: "VS-041", category: "close-editorial", professions: [], title: "", tags: [], image: "images/catalogo/VS-041.png" },
-  { code: "VS-042", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-042.png" },
-  { code: "VS-043", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-043.png" },
-  { code: "VS-044", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-044.png" },
-  { code: "VS-045", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-045.png" },
+  { code: "VS-042", category: "close-editorial", professions: [], title: "", tags: [], image: "images/catalogo/VS-042.png" },
+  { code: "VS-043", category: "close-editorial", professions: [], title: "", tags: [], image: "images/catalogo/VS-043.png" },
+  { code: "VS-044", category: "close-editorial", professions: [], title: "", tags: [], image: "images/catalogo/VS-044.png" },
+  { code: "VS-045", category: "ar-livre", professions: [], title: "", tags: [], image: "images/catalogo/VS-045.png" },
   { code: "VS-046", category: "sentada-poltrona", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-046.png" },
   { code: "VS-047", category: "close-editorial", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-047.png" },
   { code: "VS-048", category: "mesa-trabalho", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-048.png" },
@@ -113,8 +112,15 @@ const catalogPhotos = [
   { code: "VS-059", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-059.png" },
   { code: "VS-060", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-060.png" },
   { code: "VS-061", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-061.png" },
-  { code: "VS-062", category: "atendimento", professions: ["esteticista"], title: "", tags: [], image: "images/catalogo/VS-062.png" },
+  { code: "VS-062", category: "em-pe-movimento", professions: ["esteticista"], title: "", tags: [], image: "images/catalogo/VS-062.png" },
   { code: "VS-063", category: "em-pe-movimento", professions: ["palestrante"], title: "", tags: [], image: "images/catalogo/VS-063.png" },
   { code: "VS-064", category: "mesa-trabalho", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-064.png" },
   { code: "VS-065", category: "em-pe-movimento", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-065.png" },
+  { code: "VS-066", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: ["reiki", "imposição-de-maos"], image: "images/catalogo/VS-066.png" },
+  { code: "VS-067", category: "close-editorial", professions: ["terapia-holistica"], title: "", tags: ["reiki", "maos-sobre-rosto"], image: "images/catalogo/VS-067.png" },
+  { code: "VS-068", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: ["reiki", "jaleco"], image: "images/catalogo/VS-068.png" },
+  { code: "VS-069", category: "close-editorial", professions: ["terapia-holistica"], title: "", tags: ["reiki", "testa"], image: "images/catalogo/VS-069.png" },
+  { code: "VS-070", category: "sentada-poltrona", professions: ["terapia-holistica"], title: "", tags: ["reiki", "poltrona"], image: "images/catalogo/VS-070.png" },
+  { code: "VS-071", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: ["reiki", "cristais"], image: "images/catalogo/VS-071.png" },
+  { code: "VS-072", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: ["reiki", "pes"], image: "images/catalogo/VS-072.png" },
 ];
