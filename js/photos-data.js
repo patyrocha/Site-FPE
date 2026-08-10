@@ -13,23 +13,27 @@
 // Para criar uma categoria nova: adicione um objeto igual aos abaixo.
 // Para remover: apague o objeto (e mude a categoria das fotos que a usavam).
 const CATEGORIES = [
-  { id: "profissional", label: "Profissional / Branding" },
-  { id: "consultorio", label: "Consultório" },
-  { id: "estudio", label: "Estúdio" },
-  { id: "lifestyle", label: "Lifestyle" },
-  { id: "externo", label: "Externo" },
+  { id: "retratos-profissionais", label: "Retratos Profissionais" },
+  { id: "sentada-poltrona", label: "Sentada e Poltrona" },
+  { id: "mesa-trabalho", label: "Mesa e Trabalho" },
+  { id: "em-pe-movimento", label: "Em Pé e Movimento" },
+  { id: "lifestyle-natural", label: "Lifestyle e Natural" },
+  { id: "ar-livre", label: "Ar Livre" },
+  { id: "close-editorial", label: "Close e Editorial" },
+  { id: "atendimento", label: "Atendimento" },
 ];
 
 // Profissões (navegação "Por profissão"). Mesma regra do "id" das categorias:
 // pode renomear o "label" quando quiser, mas evite mudar o "id" depois de
 // usado em alguma fotografia.
 const PROFESSIONS = [
-  { id: "psicologas", label: "Psicólogas / Psicanalistas" },
-  { id: "terapeutas", label: "Terapeutas" },
-  { id: "terapeutas-cristas", label: "Terapeutas Cristãs" },
-  { id: "nutricionistas", label: "Nutricionistas" },
-  { id: "psicopedagogas", label: "Psicopedagogas" },
-  { id: "empreendedoras", label: "Empreendedoras" },
+  { id: "psicologia-psiquiatria", label: "Psicologia e Psiquiatria" },
+  { id: "psicopedagoga", label: "Psicopedagoga" },
+  { id: "terapeuta-crista", label: "Terapeuta Cristã" },
+  { id: "terapia-holistica", label: "Terapia Holística e Integrativa" },
+  { id: "esteticista", label: "Esteticista" },
+  { id: "palestrante", label: "Palestrante" },
+  { id: "pompoarista", label: "Pompoarista" },
 ];
 
 // Fotografias do catálogo.
@@ -37,7 +41,8 @@ const PROFESSIONS = [
 // - code: identificador FIXO da foto (ex: "VS-014"). Nunca reaproveite nem
 //   altere o código de uma foto já publicada, mesmo que ela seja movida ou
 //   reordenada — clientes podem citar esse código numa conversa futura.
-//   Ao adicionar uma foto nova, use o próximo número disponível.
+//   Ao adicionar uma foto nova, use o próximo número disponível (a próxima
+//   livre depois deste lote é VS-066).
 // - category: precisa ser um "id" que exista em CATEGORIES acima.
 // - professions: lista de "id" de PROFESSIONS a que essa foto serve de
 //   referência. Uma mesma foto pode pertencer a várias profissões (ou nenhuma
@@ -45,40 +50,71 @@ const PROFESSIONS = [
 // - title: legenda curta opcional (pode deixar "").
 // - tags: palavras-chave internas, não aparecem para a cliente (uso futuro).
 // - image: link (https://...) ou caminho de arquivo local
-//   (ex: "images/catalogo/VS-014.jpg").
+//   (ex: "images/catalogo/VS-014.png").
 const catalogPhotos = [
-  { code: "VS-001", category: "profissional", professions: ["empreendedoras"], title: "Retrato executivo", tags: ["blazer", "frontal"], image: "https://picsum.photos/seed/vs-001/700/900" },
-  { code: "VS-002", category: "profissional", professions: ["empreendedoras", "psicologas"], title: "Perfil para LinkedIn", tags: ["linkedin", "sorriso"], image: "https://picsum.photos/seed/vs-002/700/900" },
-  { code: "VS-003", category: "profissional", professions: ["empreendedoras"], title: "", tags: ["braços cruzados"], image: "https://picsum.photos/seed/vs-003/700/900" },
-  { code: "VS-004", category: "profissional", professions: ["nutricionistas", "empreendedoras"], title: "", tags: ["sorriso", "confiante"], image: "https://picsum.photos/seed/vs-004/700/900" },
-  { code: "VS-005", category: "profissional", professions: ["psicopedagogas"], title: "Frontal simples", tags: ["frontal"], image: "https://picsum.photos/seed/vs-005/700/900" },
-  { code: "VS-006", category: "profissional", professions: [], title: "", tags: ["perfil"], image: "https://picsum.photos/seed/vs-006/700/900" },
-
-  { code: "VS-007", category: "consultorio", professions: ["psicologas", "terapeutas"], title: "Atendimento", tags: ["sentada", "notebook", "poltrona"], image: "https://picsum.photos/seed/vs-007/700/900" },
-  { code: "VS-008", category: "consultorio", professions: ["terapeutas-cristas"], title: "Anotações", tags: ["prancheta"], image: "https://picsum.photos/seed/vs-008/700/900" },
-  { code: "VS-009", category: "consultorio", professions: ["psicopedagogas"], title: "", tags: ["recepção"], image: "https://picsum.photos/seed/vs-009/700/900" },
-  { code: "VS-010", category: "consultorio", professions: ["psicologas", "terapeutas-cristas"], title: "Escuta acolhedora", tags: ["poltrona", "acolhedora"], image: "https://picsum.photos/seed/vs-010/700/900" },
-  { code: "VS-011", category: "consultorio", professions: ["terapeutas"], title: "", tags: ["sessão"], image: "https://picsum.photos/seed/vs-011/700/900" },
-  { code: "VS-012", category: "consultorio", professions: ["psicopedagogas", "psicologas"], title: "", tags: ["material"], image: "https://picsum.photos/seed/vs-012/700/900" },
-
-  { code: "VS-013", category: "estudio", professions: [], title: "Fundo neutro", tags: ["editorial"], image: "https://picsum.photos/seed/vs-013/700/900" },
-  { code: "VS-014", category: "estudio", professions: ["empreendedoras"], title: "", tags: ["luz dramática"], image: "https://picsum.photos/seed/vs-014/700/900" },
-  { code: "VS-015", category: "estudio", professions: [], title: "Preto e branco", tags: ["pb", "clássico"], image: "https://picsum.photos/seed/vs-015/700/900" },
-  { code: "VS-016", category: "estudio", professions: ["psicologas"], title: "", tags: ["fundo claro"], image: "https://picsum.photos/seed/vs-016/700/900" },
-  { code: "VS-017", category: "estudio", professions: [], title: "", tags: ["fundo escuro"], image: "https://picsum.photos/seed/vs-017/700/900" },
-  { code: "VS-018", category: "estudio", professions: ["empreendedoras"], title: "Editorial", tags: ["moda"], image: "https://picsum.photos/seed/vs-018/700/900" },
-
-  { code: "VS-019", category: "lifestyle", professions: ["nutricionistas"], title: "No café", tags: ["casual"], image: "https://picsum.photos/seed/vs-019/700/900" },
-  { code: "VS-020", category: "lifestyle", professions: ["empreendedoras"], title: "", tags: ["andando"], image: "https://picsum.photos/seed/vs-020/700/900" },
-  { code: "VS-021", category: "lifestyle", professions: ["psicopedagogas"], title: "Sorrindo naturalmente", tags: ["candid"], image: "https://picsum.photos/seed/vs-021/700/900" },
-  { code: "VS-022", category: "lifestyle", professions: ["nutricionistas", "empreendedoras"], title: "", tags: ["cozinha"], image: "https://picsum.photos/seed/vs-022/700/900" },
-  { code: "VS-023", category: "lifestyle", professions: [], title: "", tags: ["leitura"], image: "https://picsum.photos/seed/vs-023/700/900" },
-  { code: "VS-024", category: "lifestyle", professions: ["empreendedoras"], title: "No notebook", tags: ["trabalho"], image: "https://picsum.photos/seed/vs-024/700/900" },
-
-  { code: "VS-025", category: "externo", professions: ["terapeutas"], title: "Luz natural", tags: ["jardim"], image: "https://picsum.photos/seed/vs-025/700/900" },
-  { code: "VS-026", category: "externo", professions: [], title: "", tags: ["urbano"], image: "https://picsum.photos/seed/vs-026/700/900" },
-  { code: "VS-027", category: "externo", professions: ["nutricionistas"], title: "Golden hour", tags: ["pôr do sol"], image: "https://picsum.photos/seed/vs-027/700/900" },
-  { code: "VS-028", category: "externo", professions: [], title: "", tags: ["parque"], image: "https://picsum.photos/seed/vs-028/700/900" },
-  { code: "VS-029", category: "externo", professions: ["terapeutas-cristas"], title: "", tags: ["natureza"], image: "https://picsum.photos/seed/vs-029/700/900" },
-  { code: "VS-030", category: "externo", professions: ["empreendedoras"], title: "", tags: ["caminhada"], image: "https://picsum.photos/seed/vs-030/700/900" },
+  { code: "VS-001", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-001.png" },
+  { code: "VS-002", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-002.png" },
+  { code: "VS-003", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-003.png" },
+  { code: "VS-004", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-004.png" },
+  { code: "VS-005", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-005.png" },
+  { code: "VS-006", category: "retratos-profissionais", professions: [], title: "", tags: [], image: "images/catalogo/VS-006.png" },
+  { code: "VS-007", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-007.png" },
+  { code: "VS-008", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-008.png" },
+  { code: "VS-009", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-009.png" },
+  { code: "VS-010", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-010.png" },
+  { code: "VS-011", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-011.png" },
+  { code: "VS-012", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-012.png" },
+  { code: "VS-013", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-013.png" },
+  { code: "VS-014", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-014.png" },
+  { code: "VS-015", category: "sentada-poltrona", professions: [], title: "", tags: [], image: "images/catalogo/VS-015.png" },
+  { code: "VS-016", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-016.png" },
+  { code: "VS-017", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-017.png" },
+  { code: "VS-018", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-018.png" },
+  { code: "VS-019", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-019.png" },
+  { code: "VS-020", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-020.png" },
+  { code: "VS-021", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-021.png" },
+  { code: "VS-022", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-022.png" },
+  { code: "VS-023", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-023.png" },
+  { code: "VS-024", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-024.png" },
+  { code: "VS-025", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-025.png" },
+  { code: "VS-026", category: "mesa-trabalho", professions: [], title: "", tags: [], image: "images/catalogo/VS-026.png" },
+  { code: "VS-027", category: "mesa-trabalho", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-027.png" },
+  { code: "VS-028", category: "em-pe-movimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-028.png" },
+  { code: "VS-029", category: "em-pe-movimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-029.png" },
+  { code: "VS-030", category: "em-pe-movimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-030.png" },
+  { code: "VS-031", category: "em-pe-movimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-031.png" },
+  { code: "VS-032", category: "em-pe-movimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-032.png" },
+  { code: "VS-033", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-033.png" },
+  { code: "VS-034", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-034.png" },
+  { code: "VS-035", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-035.png" },
+  { code: "VS-036", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-036.png" },
+  { code: "VS-037", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-037.png" },
+  { code: "VS-038", category: "lifestyle-natural", professions: [], title: "", tags: [], image: "images/catalogo/VS-038.png" },
+  { code: "VS-039", category: "ar-livre", professions: [], title: "", tags: [], image: "images/catalogo/VS-039.png" },
+  { code: "VS-040", category: "ar-livre", professions: [], title: "", tags: [], image: "images/catalogo/VS-040.png" },
+  { code: "VS-041", category: "close-editorial", professions: [], title: "", tags: [], image: "images/catalogo/VS-041.png" },
+  { code: "VS-042", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-042.png" },
+  { code: "VS-043", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-043.png" },
+  { code: "VS-044", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-044.png" },
+  { code: "VS-045", category: "atendimento", professions: [], title: "", tags: [], image: "images/catalogo/VS-045.png" },
+  { code: "VS-046", category: "sentada-poltrona", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-046.png" },
+  { code: "VS-047", category: "close-editorial", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-047.png" },
+  { code: "VS-048", category: "mesa-trabalho", professions: ["psicologia-psiquiatria"], title: "", tags: [], image: "images/catalogo/VS-048.png" },
+  { code: "VS-049", category: "em-pe-movimento", professions: ["psicopedagoga"], title: "", tags: [], image: "images/catalogo/VS-049.png" },
+  { code: "VS-050", category: "sentada-poltrona", professions: ["terapeuta-crista"], title: "", tags: [], image: "images/catalogo/VS-050.png" },
+  { code: "VS-051", category: "mesa-trabalho", professions: ["terapeuta-crista"], title: "", tags: [], image: "images/catalogo/VS-051.png" },
+  { code: "VS-052", category: "ar-livre", professions: ["terapeuta-crista"], title: "", tags: [], image: "images/catalogo/VS-052.png" },
+  { code: "VS-053", category: "close-editorial", professions: ["terapeuta-crista"], title: "", tags: [], image: "images/catalogo/VS-053.png" },
+  { code: "VS-054", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-054.png" },
+  { code: "VS-055", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-055.png" },
+  { code: "VS-056", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-056.png" },
+  { code: "VS-057", category: "close-editorial", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-057.png" },
+  { code: "VS-058", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-058.png" },
+  { code: "VS-059", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-059.png" },
+  { code: "VS-060", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-060.png" },
+  { code: "VS-061", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-061.png" },
+  { code: "VS-062", category: "atendimento", professions: ["esteticista"], title: "", tags: [], image: "images/catalogo/VS-062.png" },
+  { code: "VS-063", category: "em-pe-movimento", professions: ["palestrante"], title: "", tags: [], image: "images/catalogo/VS-063.png" },
+  { code: "VS-064", category: "mesa-trabalho", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-064.png" },
+  { code: "VS-065", category: "em-pe-movimento", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-065.png" },
 ];
