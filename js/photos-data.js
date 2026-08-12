@@ -111,7 +111,7 @@ const catalogPhotos = [
   { code: "VS-058", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-058.png" },
   { code: "VS-059", category: "mesa-trabalho", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-059.png" },
   { code: "VS-060", category: "ar-livre", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-060.png" },
-  { code: "VS-061", category: "em-pe-movimento", professions: ["terapia-holistica"], title: "", tags: [], image: "images/catalogo/VS-061.png" },
+  { code: "VS-061", category: "em-pe-movimento", professions: ["terapia-holistica", "terapeuta-crista"], title: "", tags: [], image: "images/catalogo/VS-061.png" },
   { code: "VS-062", category: "em-pe-movimento", professions: ["esteticista"], title: "", tags: [], image: "images/catalogo/VS-062.png" },
   { code: "VS-063", category: "em-pe-movimento", professions: ["palestrante"], title: "", tags: [], image: "images/catalogo/VS-063.png" },
   { code: "VS-064", category: "mesa-trabalho", professions: ["pompoarista"], title: "", tags: [], image: "images/catalogo/VS-064.png" },
